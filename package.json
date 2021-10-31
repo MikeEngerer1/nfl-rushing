@@ -1,0 +1,32 @@
+{
+  "name": "nfl-rushing",
+  "version": "1.0.0",
+  "description": "At theScore, we are always looking for intelligent, resourceful, full-stack developers to join our growing team. To help us evaluate new talent, we have created this take-home interview question. This question should take you no more than a few hours.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "knex": "/node_modules/.bin/knex"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github-yoshi:MikeEngerer1/nfl-rushing.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^7.11.0",
+    "knex": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "https": "^1.0.0",
+    "moment-timezone": "^0.5.33",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.14",
+    "utf8": "^3.0.0",
+    "uuid": "^8.3.2"
+  }
+}
