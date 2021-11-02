@@ -4,6 +4,7 @@ const express = require('express'),
       cors = require('cors'),
       moment = require('moment-timezone'),
       https = require('https'),
+      json2csv = require('json2csv'),
       morgan = require('morgan');
 
 require('dotenv').config();
@@ -26,30 +27,39 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 });
 
+app.get('/rushing/:name', (req, res) => {
+  const { name } = req.query;
+  if (name && typeof name === 'string') {
+    return res.render({})
+  }
+})
 app.get('/rushing', (req, res) => {
-  return Rushing.list({}).then(rushing => {
-    // remove irrelevent/internal fields
-    rushing = rushing.map(rush => {
-      delete rush.id;
-      delete rush.created_at;
-      delete rush.updated_at;
-      return rush;
-    });
-
-    const headers = Object.keys(rushing[0]);
-
-    const rows = rushing.reduce((rows, obj) => {
-        let row = [];
-        for (let field in obj) {
-          const value = obj[field];
-          row.push(value);
-        }
-        rows.push(row);
-        return rows;
-      },[]);
-    
-    const data = {headers, rows}
-    return res.render('pages/rushing', {data});
+  const { csv, player } = req.query;
+  const opts = {}
+  if (player) opts.Player = player; 
+  return Rushing.list(opts).then(rushingData => {
+    if (!rushingData || !rushingData.length) {
+      const templateData = {status: 422, error: 'unprocessable entity', message: 'no data found for given query', data: null}
+      return res.render('pages/error', {templateData});
+    }
+    rushingData = rushingData.map(player => {
+      delete player.id;
+      delete player.created_at;
+      delete player.updated_at;
+      return player
+    })
+    // if user requests a csv download, send the file rather than rendering the page
+    if (csv) {
+      // const /**/
+    } else {
+      const templateData = Rushing.format('html-table', rushingData);
+      return res.render('pages/rushing', {templateData});
+    }
+  })
+  .catch(err => {
+    console.log(err);
+    const templateData = {status: 500, error: err,  message: 'error while processing request data', data: null};
+    return res.render('pages/error', {templateData})
   })
 })
 
