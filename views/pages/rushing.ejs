@@ -3,81 +3,32 @@
 
     <head>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="scripts/sorttable.js"></script>
+        <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
+        <link rel="stylesheet" href="css/rushing.css">
+        <link rel="stylesheet" href="css/normalize.css">
         <title>NFL Rushing</title>
     </head>
-
-    <style>
-      th.sortable {
-        cursor: pointer;
-      }
-      th.sortable::after {
-        content: '^';
-      }
-      th.sortable:active {
-        transform: rotate(180deg);
-      }
-      /* table styling credit goes to: https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l */
-      .styled-table {
-        width:  100%;
-        margin:  0 auto;
-      }
-      .styled-table {
-          border-collapse: collapse;
-          margin: 25px 0;
-          font-size: 0.9em;
-          font-family: sans-serif;
-          min-width: 400px;
-          box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-      }
-
-
-      .styled-table thead tr {
-          background-color: #009879;
-          color: #ffffff;
-          text-align: left;
-      }
-
-      .styled-table th,
-      .styled-table td {
-          padding: 12px 15px;
-      }
-      .styled-table tbody tr {
-          border-bottom: 1px solid #dddddd;
-      }
-
-      .styled-table tbody tr:nth-of-type(even) {
-          background-color: #f3f3f3;
-      }
-
-      .styled-table tbody tr:last-of-type {
-          border-bottom: 2px solid #009879;
-      }
-      .styled-table tbody tr.active-row {
-          font-weight: bold;
-          color: #009879;
-      }
-
-
-
-    </style>
     <body>
-      <table class="styled-table">
+      <h1 class="title">NFL Rushing Statistics</h1>
+      <input id="search-value" type="text" placeholder="Player Name">
+      <button id="search" type="submit">Search</button>
+      <table class="styled-table sortable">
         <thead>
           <tr>
-            <% for (let i = 0; i < data.headers.length; i++) { %>
-              <th data-field="<%= data.headers[i] %>" 
-                data-sortable="<%= data.headers[i] === 'Yds' || data.headers[i] === 'Lng' ||data.headers[i] === 'TD' ? 'true' : 'false' %>"
-                class="<%= data.headers[i] === 'Yds' || data.headers[i] === 'Lng' ||data.headers[i] === 'TD' ? 'sortable' : '' %>">
-                  <%= data.headers[i] %>
+            <% for (let i = 0; i < templateData.headers.length; i++) { %>
+              <th data-field="<%= templateData.headers[i].header %>" 
+                class="<%= templateData.headers[i].sortable ? 'sortable' : 'sorttable_nosort' %>">
+                  <%= templateData.headers[i].header %>
               </th>
             <% } %>
           </tr>
         </thead>
         <tbody>
-          <% for (let i = 0; i < data.rows.length; i++) { %>
+          <% for (let i = 0; i < templateData.rows.length; i++) { %>
             <tr>
-              <% for (let j = 0; j < data.rows[i].length; j++) { %>
-                <td data-field="<%= data.headers[j] %>" ><%= data.rows[i][j] %></td>            
+              <% for (let j = 0; j < templateData.rows[i].length; j++) { %>
+                <td data-field="<%= templateData.headers[j].header %>" ><%= templateData.rows[i][j] %></td>            
               <% } %>
             </tr>
           <% } %>
@@ -87,9 +38,13 @@
     <script type="text/javascript">
 
       $(document).ready(() => {
-        $('.sortable').click(() => {
-
-          $(this).css({content: '^', transform: 'rotate(180deg)')})
+        const queryParams = window.location.search;
+        $('#search').click(e => {
+          // e.preventDefault();
+          const value = $('#search-value').val();
+          console.log(value)
+          if (!value) return;
+          window.location.href = `/rushing?player=${value}`;
         })
       })
 
