@@ -1,7 +1,20 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  padding: 20px 50px;
+}
+
+#actions {
+  display:  flex;
+  justify-content: space-between;
+}
+.pagination {
+  display: inline;
+}
 .title {
   text-align:  center;
   padding:  10px 10px;
 }
+/* adds sort icon to sortable columns */
 table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
     content: " \25B4\25BE" 
 }
