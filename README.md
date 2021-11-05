@@ -54,4 +54,27 @@ We will evaluate you on your ability to solve the problem defined in the require
 If you have any questions regarding requirements, do not hesitate to email your contact at theScore for clarification.
 
 ### Installation and running this solution
-... TODO   
+---
+
+1. ```git clone git@github.com:MikeEngerer1/nfl-rushing.git```
+2. ```npm i``` 
+3. [Install Postgresql](https://www.postgresql.org/download/)
+4. Within psql shell: ```create database <DB_NAME> owner <DB_USER>;```
+5. Migrate database: ```npx knex migrate:latest``` 
+6. Seed database:```npx knex seed:run```
+7. Create .env: ```touch .env```
+8. Populate newly created .env by mirroring .env.example
+9. Navigate to the project's root directory and start the server: ```nodemon```
+10. Visit ```localhost:<PORT>/rushing``` in your browser 
+
+### Dependencies
+---
+
+* dotenv
+* express
+* body-parser
+* pg
+* knex
+* jsonwebtoken
+* bcrypt
+* nodemon
