@@ -1,4 +1,4 @@
-
+// create table 
 exports.up = function(knex) {
   return knex.schema.createTable('rushing', table => {
     table.increments();
@@ -21,8 +21,7 @@ exports.up = function(knex) {
   })
 };
 
-exports.down = function(knex) {
-  return knex.schema.dropTable('rushing')
-};
+// drop table
+exports.down = knex => knex.schema.dropTable('rushing');
 
 
