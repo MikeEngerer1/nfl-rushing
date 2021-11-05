@@ -56,8 +56,8 @@ If you have any questions regarding requirements, do not hesitate to email your 
 ### Installation and running this solution
 ---
 
-1. ```git clone git@github.com:MikeEngerer1/nfl-rushing.git```
-2. ```npm i``` 
+1. Clone this repo to your local machine: ```git clone git@github.com:MikeEngerer1/nfl-rushing.git```
+2. Install dependencies: ```npm i``` 
 3. [Install Postgresql](https://www.postgresql.org/download/)
 4. Within psql shell: ```create database <DB_NAME> owner <DB_USER>;```
 5. Migrate database: ```npx knex migrate:latest``` 
