@@ -62,7 +62,7 @@ If you have any questions regarding requirements, do not hesitate to email your 
 4. Create .env: ```touch .env```
 5. Populate newly created .env by mirroring .env.example
 6. [Install Postgresql](https://www.postgresql.org/download/)
-7. Within psql shell (```psql```) ```create database thescore owner <DB_USER>;```
+7. Within psql shell (```psql```): ```create database thescore owner <DB_USER>;```
 8. Migrate database: ```npx knex migrate:latest``` 
 9. Seed database:```npx knex seed:run```
 10. Start the server: ```nodemon```
