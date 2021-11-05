@@ -58,11 +58,11 @@ If you have any questions regarding requirements, do not hesitate to email your 
 
 1. Clone this repo to your local machine: ```git clone git@github.com:MikeEngerer1/nfl-rushing.git```
 2. Install dependencies: ```npm i``` 
-3. [Install Postgresql](https://www.postgresql.org/download/)
-4. Navigate to the project's root directory
-5. Create .env: ```touch .env```
-6. Populate newly created .env by mirroring .env.example
-7. Within psql shell: ```create database thescore owner <DB_USER>;```
+3. Navigate to the project's root directory
+4. Create .env: ```touch .env```
+5. Populate newly created .env by mirroring .env.example
+6. [Install Postgresql](https://www.postgresql.org/download/)
+7. Within psql shell (```psql```) ```create database thescore owner <DB_USER>;```
 8. Migrate database: ```npx knex migrate:latest``` 
 9. Seed database:```npx knex seed:run```
 10. Start the server: ```nodemon```
